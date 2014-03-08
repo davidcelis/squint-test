@@ -15,12 +15,14 @@ describe "Squint Test", ->
     atom.packages.activatePackage('squint-test')
     atom.workspaceView.attachToDom()
 
+    editorView = atom.workspaceView.getActiveView()
+
   describe "when the squint-test:toggle event is triggered", ->
-    it "adds the .squint-test class to each editorView", ->
-      expect(atom.workspaceView.find('.squint-test').length).toBe 0
+    it "toggles the .squint-test class to the active editorView", ->
+      expect(editorView).not.toHaveClass('squint-test')
 
       atom.workspaceView.trigger 'squint-test:toggle'
-      expect(atom.workspaceView.find('.squint-test').length).toBe 1
+      expect(editorView).toHaveClass('squint-test')
 
       atom.workspaceView.trigger 'squint-test:toggle'
-      expect(atom.workspaceView.find('.squint-test').length).toBe 0
+      expect(editorView).not.toHaveClass('squint-test')
