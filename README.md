@@ -1,6 +1,6 @@
 # Squint Test for Atom.app
 
-The Squint Test is a test you can perform visually against your code. It's simple: you take a step back from your display, squint your eyes, and look at your code. Look specifically for changes in chape and changes in color. Changes in shape mean you may have a lot of nested conditionals, while changes in color mean your code may not have the same level of abstraction.
+The Squint Test is a test you can perform visually against your code. It's simple: you take a step back from your display, squint your eyes, and look at your code. Look specifically for changes in shape and changes in color. Changes in shape mean you may have a lot of nested conditionals, while changes in color mean your code may not have the same level of abstraction.
 
 However, we're programmers. Our eyes are precious. Why use your eyes to squint when you can use your editor?
 
