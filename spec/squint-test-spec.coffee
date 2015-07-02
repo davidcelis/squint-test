@@ -1,28 +1,29 @@
-{WorkspaceView} = require 'atom'
-
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
 # To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
-describe "Squint Test", ->
-  [editorView] = []
+describe 'Squint Test', ->
+  getWorkspaceView = -> atom.views.getView(atom.workspace)
+  getEditorView    = -> atom.views.getView(atom.workspace.getActiveTextEditor())
 
-  beforeEach ->
-    atom.workspaceView = new WorkspaceView
-    atom.workspaceView.openSync('sample.js')
+  squintTest = ->
+    atom.commands.dispatch(getWorkspaceView(), 'squint-test:toggle')
 
-    atom.packages.activatePackage('squint-test')
-    atom.workspaceView.attachToDom()
+  describe "squint-test:toggle", ->
+    it "toggles the .squint-text class", ->
+      waitsForPromise ->
+        atom.workspace.open('sample.js')
 
-    editorView = atom.workspaceView.getActiveView()
+      runs ->
+        atom.packages.activatePackage('squint-test')
 
-  describe "when the squint-test:toggle event is triggered", ->
-    it "toggles the .squint-test class to the active editorView", ->
-      expect(editorView).not.toHaveClass('squint-test')
+        expect(getEditorView()).not.toHaveClass('squint-test')
 
-      atom.workspaceView.trigger 'squint-test:toggle'
-      expect(editorView).toHaveClass('squint-test')
+        squintTest()
 
-      atom.workspaceView.trigger 'squint-test:toggle'
-      expect(editorView).not.toHaveClass('squint-test')
+        expect(getEditorView()).toHaveClass('squint-test')
+
+        squintTest()
+
+        expect(getEditorView()).not.toHaveClass('squint-test')

@@ -1,6 +1,8 @@
 module.exports =
   activate: (state) ->
-    atom.workspaceView.command 'squint-test:toggle', => @toggle()
+    atom.commands.add 'atom-workspace', 'squint-test:toggle': => @toggle()
 
   toggle: ->
-    atom.workspaceView.getActiveView().toggleClass 'squint-test'
+    editor = atom.views.getView atom.workspace.getActiveTextEditor()
+
+    editor.classList.toggle 'squint-test'

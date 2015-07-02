@@ -1,7 +1,11 @@
 # See https://atom.io/docs/latest/creating-a-package#menus for more details
 'context-menu':
-  '.overlayer':
-      'Enable squint testing': 'squint-test:toggle'
+  'atom-text-editor': [
+    {
+      'label': 'Toggle Squint Testing'
+      'command': 'squint-test:toggle'
+    }
+  ]
 
 'menu': [
   {
@@ -9,7 +13,10 @@
     'submenu': [
       'label': 'Squint Test'
       'submenu': [
-        { 'label': 'Toggle', 'command': 'squint-test:toggle' }
+        {
+          'label': 'Toggle'
+          'command': 'squint-test:toggle'
+        }
       ]
     ]
   }
